@@ -9,9 +9,10 @@ import java.sql.SQLException;
 
 public class Drop_Row
 {
-    private final String url = "jdbc:postgresql://localhost/Employees";
-    private final String user = "postgres";
-    private final String password = "volvo210";
+  ConnInfo connInfo =new ConnInfo();
+  private final String url = connInfo.getUrl();
+  private final String user = connInfo.getUser();
+  private final String password = connInfo.getPassword();
 
 
   public Connection connect() throws SQLException {
@@ -37,7 +38,7 @@ public class Drop_Row
     return affectedrows;
   }
 
-  /**
+  /*
    * @param args the command line arguments
    */
   public static void main(String[] args) {

@@ -7,9 +7,10 @@ import java.sql.SQLException;
 
 public class AddToTable
 {
-  private final String url = "jdbc:postgresql://localhost/Employees";
-  private final String user = "postgres";
-  private final String password = "volvo210";
+  ConnInfo connInfo =new ConnInfo();
+  private final String url = connInfo.getUrl();
+  private final String user = connInfo.getUser();
+  private final String password = connInfo.getPassword();
 
   private static final String INSERT_USERS_SQL = "INSERT INTO \"PersInfo\"" +
       "  ( \"First_name\", \"Last_name\", \"Email\") VALUES " +

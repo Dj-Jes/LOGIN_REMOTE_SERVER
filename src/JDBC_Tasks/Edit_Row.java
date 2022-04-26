@@ -7,12 +7,10 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 public class Edit_Row
 {
-
-
-
-    private final String url = "jdbc:postgresql://localhost/Employees";
-    private final String user = "postgres";
-    private final String password = "volvo210";
+  ConnInfo connInfo =new ConnInfo();
+  private final String url = connInfo.getUrl();
+  private final String user = connInfo.getUser();
+  private final String password = connInfo.getPassword();
 
 
     public Connection connect() throws SQLException {
@@ -20,7 +18,7 @@ public class Edit_Row
   }
 
     /*
-     * Update actor's last name based on actor's id
+     * Update emp's last name based on actor's id
      *
      * @param id
      * @param lastName
@@ -29,7 +27,6 @@ public class Edit_Row
     public int updateInfo( int ID,String database, String changeParameter, String changeTo ) {
       String SQL = "UPDATE" +database+  "SET" +changeParameter+ "= ? "
           + "WHERE \"EmpID\" = ?";
-
       int affectedrows = 0;
 
       try (Connection conn = connect())
@@ -49,12 +46,12 @@ public class Edit_Row
       return affectedrows;
     }
 
-    /**
+    /*
      * @param args the command line arguments
      */
     public static void main(String[] args) {
       Edit_Row editrow = new Edit_Row();
-      editrow.updateInfo(100020,"\"PersInfo\"","\"First_name\"","Jk");
+      editrow.updateInfo(100045,"\"PersInfo\"","\"Last_name\"","ko");
 
     }
 }

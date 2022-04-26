@@ -4,9 +4,10 @@ import java.sql.*;
 
 public class Select_From
 {
-  private final String url = "jdbc:postgresql://localhost/Employees";
-  private final String user = "postgres";
-  private final String password = "volvo210";
+  ConnInfo connInfo =new ConnInfo();
+  private final String url = connInfo.getUrl();
+  private final String user = connInfo.getUser();
+  private final String password = connInfo.getPassword();
 
   /*
    * Connect to the PostgreSQL database
@@ -20,7 +21,7 @@ public class Select_From
 
 
   /*
-   * Get all rows in the actor table
+   * Get all rows in table
    */
   public void getEmp() {
 
@@ -30,7 +31,7 @@ public class Select_From
     try (Connection conn = connect();
         Statement stmt = conn.createStatement();
         ResultSet rs = stmt.executeQuery(SQL)) {
-      // display actor information
+      // display emp information
       displayEmp(rs);
     } catch (SQLException ex) {
       System.out.println(ex.getMessage());
@@ -38,7 +39,7 @@ public class Select_From
   }
 
   /*
-   * Get actors count
+   * Get emp count
    * @return
    */
   public int getEmpCount() {
@@ -58,7 +59,7 @@ public class Select_From
   }
 
   /*
-   * Display actor
+   * Display emp
    *
    * @param rs
    * @throws SQLException
@@ -74,7 +75,7 @@ public class Select_From
   }
 
   /*
-   * Find actor by his/her ID
+   * Find by  ID
    *
    * @param EmpID
    */
@@ -102,7 +103,7 @@ public class Select_From
     System.out.println("getEMP don");
     select.getEmpCount();
     System.out.println(select.getEmpCount()+"  Count don");
-    select.findEmpByID(100030);
+    select.findEmpByID(100044);
     System.out.println("Find by id");
 
   }
