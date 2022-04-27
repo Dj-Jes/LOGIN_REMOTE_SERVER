@@ -23,10 +23,10 @@ public class Select_From
   /*
    * Get all rows in table
    */
-  public void getEmp() {
+  public void getEmp(String database) {
 
     String SQL = "SELECT \"EmpID\",\"First_name\", "
-        + "\"Last_name\", \"Email\" FROM \"PersInfo\"";
+        + "\"Last_name\", \"Email\" FROM "+database;
 
     try (Connection conn = connect();
         Statement stmt = conn.createStatement();
@@ -42,8 +42,9 @@ public class Select_From
    * Get emp count
    * @return
    */
-  public int getEmpCount() {
-    String SQL = "SELECT count(*) FROM \"PersInfo\"";
+
+  public int getEmpCount(String database) {
+    String SQL = "SELECT count(*) FROM "+ database;
     int count = 0;
 
     try (Connection conn = connect();
@@ -64,12 +65,21 @@ public class Select_From
    * @param rs
    * @throws SQLException
    */
+
+
+
   private void displayEmp(ResultSet rs) throws SQLException {
     while (rs.next()) {
-      System.out.println(rs.getString("EmpID") + "\t"
-          + rs.getString("First_name") + "\t"
-          + rs.getString("Last_name") + "\t"
-          + rs.getString("Email"));
+      System.out.println
+          (rs.getString("medarbejderID") + "\t"
+          + rs.getString("fornavn")      + "\t"
+          + rs.getString("mellemnavn")   + "\t"
+          + rs.getString("efternavn")    + "\t"
+          + rs.getString("dob")          + "\t"
+          + rs.getString("email")        + "\t"
+          + rs.getInt("tlf")             + "\t"
+          + rs.getString("adresse")      + "\t"
+          + rs.getBoolean("leder"));
 
     }
   }
@@ -79,14 +89,13 @@ public class Select_From
    *
    * @param EmpID
    */
-  public void findEmpByID(int EmpID) {
-    String SQL = "select * from \"PersInfo\""
-        + "WHERE \"EmpID\" = ?;";
+  public void findEmpByID(int medarbejderID, String database) {
+    String SQL = "select * from "+database+ "WHERE medarbejderID = ?;";
 
     try (Connection conn = connect();
         PreparedStatement pstmt = conn.prepareStatement(SQL)) {
 
-      pstmt.setInt(1, EmpID);
+      pstmt.setInt(1, medarbejderID);
       ResultSet rs = pstmt.executeQuery();
       displayEmp(rs);
     } catch (SQLException ex) {
@@ -99,11 +108,11 @@ public class Select_From
    */
   public static void main(String[] args) {
     Select_From select = new Select_From();
-    select.getEmp();
+    select.getEmp("medarbejdere");
     System.out.println("getEMP don");
-    select.getEmpCount();
-    System.out.println(select.getEmpCount()+"  Count don");
-    select.findEmpByID(100044);
+    select.getEmpCount("medarbejdere");
+    System.out.println(select.getEmpCount("medarbejdere")+"  Count don");
+    select.findEmpByID(123456,"medarbejdere");
     System.out.println("Find by id");
 
   }

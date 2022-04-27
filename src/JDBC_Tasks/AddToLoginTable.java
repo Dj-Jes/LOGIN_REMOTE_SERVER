@@ -13,7 +13,7 @@ public class AddToLoginTable
   private final String password = connInfo.getPassword();
 
   private static final String Insert_Login_SQL = "INSERT INTO \"LoginInfo\"" +
-      "  ( \"Password\") VALUES " + " (?);";
+      "  ( \"Password\") VALUES " + " (?)";
 
   public void insertLogin() throws SQLException
   {

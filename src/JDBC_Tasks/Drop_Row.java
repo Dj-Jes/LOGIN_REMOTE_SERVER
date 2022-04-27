@@ -21,7 +21,7 @@ public class Drop_Row
 
   public int deleteRow(int id, String database) {
 
-    String SQL = "DELETE FROM " + database + " WHERE \"EmpID\" = ?";
+    String SQL = "DELETE FROM " + database + " WHERE MedarbejderID = ?";
 
     int affectedrows = 0;
 
@@ -43,8 +43,12 @@ public class Drop_Row
    */
   public static void main(String[] args) {
     Drop_Row drop = new Drop_Row();
-    drop.deleteRow(100002, "\"LoginInfo\"");
-    drop.deleteRow(100002, "\"PersInfo\"");
+    drop.deleteRow(100002, "login");
+    drop.deleteRow(100002, "medarbejdere");
+
+    drop.deleteRow(100002, "tjekind");
+
+    drop.deleteRow(100002, "vagter");
 
   }
 }

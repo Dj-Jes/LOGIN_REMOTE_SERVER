@@ -12,9 +12,9 @@ public class AddToTable
   private final String user = connInfo.getUser();
   private final String password = connInfo.getPassword();
 
-  private static final String INSERT_USERS_SQL = "INSERT INTO \"PersInfo\"" +
-      "  ( \"First_name\", \"Last_name\", \"Email\") VALUES " +
-      " (?, ?, ?);";
+  private static final String INSERT_USERS_SQL = "INSERT INTO medarbejdere" +
+      "  ( fornavn, mellemnavn,efternavn, dob, Email, tlf,adresse,leder) VALUES " +
+      " (?,?,?,?,?,?,?,?);";
 
   public void insertRecord() throws SQLException
   {
