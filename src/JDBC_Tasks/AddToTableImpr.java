@@ -21,10 +21,10 @@ public class AddToTableImpr
      * @param lastName
      * @return the number of affected rows
      */
-    public int addEmp(String database, String fornavn, String mellemnavn, String efternavn,
+    public int addEmp(String database, String fornavn, String efternavn,
                       String dob, String email, int tlf, String adresse, Boolean leder) {
         String SQL = "insert into" +database+  " " +
-                "fornavn,mellemnavn,efternavn,dob,email,tlf,adresse, leder "+ "(?,?,?,?,?,?,?,?)";
+                "fornavn,efternavn,dob,email,tlf,adresse, leder "+ "(?,?,?,?,?,?,?,)";
         int affectedrows = 0;
 
         try (Connection conn = connect())
@@ -32,13 +32,12 @@ public class AddToTableImpr
             try (PreparedStatement pstmt = conn.prepareStatement(SQL))
             {
                 pstmt.setString (1, fornavn);
-                pstmt.setString (2, mellemnavn);
-                pstmt.setString (3, efternavn);
-                pstmt.setString (4,dob);
-                pstmt.setString (5, email);
-                pstmt.setInt    (6,tlf);
-                pstmt.setString (7,adresse);
-                pstmt.setBoolean(8,leder);
+                pstmt.setString (2, efternavn);
+                pstmt.setString (3,dob);
+                pstmt.setString (4, email);
+                pstmt.setInt    (5,tlf);
+                pstmt.setString (6,adresse);
+                pstmt.setBoolean(7,leder);
 
 
                 affectedrows = pstmt.executeUpdate();
@@ -58,7 +57,7 @@ public class AddToTableImpr
     public static void main(String[] args) {
 
         AddToTableImpr addToTableImpr =new AddToTableImpr();
-        addToTableImpr.addEmp("medarbejdere","Jon",null,"Jonson","20-4-1999","jon@gmail.com",
+        addToTableImpr.addEmp("medarbejdere","Jon","Jonson","20-4-1999","jon@gmail.com",
                 123456,"Sted, Postnr,By",true);
 
     }

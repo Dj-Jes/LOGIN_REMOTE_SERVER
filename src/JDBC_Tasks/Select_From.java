@@ -23,10 +23,10 @@ public class Select_From
   /*
    * Get all rows in table
    */
-  public void getEmp(String database) {
+  public void getEmp(String database, int medarbejderID, String fornavn, String efternavn,
+                     String dob, String email, int tlf, String adresse, Boolean leder) {
 
-    String SQL = "SELECT \"EmpID\",\"First_name\", "
-        + "\"Last_name\", \"Email\" FROM "+database;
+    String SQL = "SELECT "+ medarbejderID + fornavn +efternavn + dob + email + tlf + adresse + leder +  " FROM "+database;
 
     try (Connection conn = connect();
         Statement stmt = conn.createStatement();
@@ -73,7 +73,6 @@ public class Select_From
       System.out.println
           (rs.getString("medarbejderID") + "\t"
           + rs.getString("fornavn")      + "\t"
-          + rs.getString("mellemnavn")   + "\t"
           + rs.getString("efternavn")    + "\t"
           + rs.getString("dob")          + "\t"
           + rs.getString("email")        + "\t"
@@ -108,7 +107,7 @@ public class Select_From
    */
   public static void main(String[] args) {
     Select_From select = new Select_From();
-    select.getEmp("medarbejdere");
+    select.getEmp("medarbejdere", 1235,"bob", "bobson", "12-12-1212", "@gmail.com", 1235, "8700", true);
     System.out.println("getEMP don");
     select.getEmpCount("medarbejdere");
     System.out.println(select.getEmpCount("medarbejdere")+"  Count don");

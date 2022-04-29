@@ -5,7 +5,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
-public class AddToLoginImpr {
+public class AddToLoginTableImpr {
 
     ConnInfo connInfo = new ConnInfo();
     private final String url = connInfo.getUrl();
@@ -69,7 +69,7 @@ public class AddToLoginImpr {
      */
     public static void main(String[] args) {
 
-        AddToLoginImpr addToLoginImpr = new AddToLoginImpr();
+        AddToLoginTableImpr addToLoginImpr = new AddToLoginTableImpr();
         addToLoginImpr.addLogin("medarbejdere", "1234");
 
     }

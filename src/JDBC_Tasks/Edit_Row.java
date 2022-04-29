@@ -24,7 +24,7 @@ public class Edit_Row
      * @param lastName
      * @return the number of affected rows
      */
-    public int updateInfo( int ID,String database, String changeParameter, String changeTo ) {
+    public int updateInfo( int medarbejderID,String database, String changeParameter, String changeTo ) {
       String SQL = "UPDATE" +database+  "SET" +changeTo+ "= ? "
           + "WHERE" +changeParameter+ "= ?";
       int affectedrows = 0;
@@ -34,7 +34,7 @@ public class Edit_Row
         try (PreparedStatement pstmt = conn.prepareStatement(SQL))
         {
           pstmt.setString(1, changeTo);
-          pstmt.setInt(2, ID);
+          pstmt.setInt(2, medarbejderID);
           affectedrows = pstmt.executeUpdate();
 
         }
@@ -51,7 +51,7 @@ public class Edit_Row
      */
     public static void main(String[] args) {
       Edit_Row editrow = new Edit_Row();
-      editrow.updateInfo(100045,"medarbejdere","\"Last_name\"","ko");
+      editrow.updateInfo(100045,"medarbejdere","efternavn","idk");
 
     }
 }

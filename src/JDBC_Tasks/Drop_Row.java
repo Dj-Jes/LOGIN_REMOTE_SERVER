@@ -1,7 +1,5 @@
 package JDBC_Tasks;
 
-import com.sun.tools.javac.Main;
-
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -19,7 +17,7 @@ public class Drop_Row
     return DriverManager.getConnection(url, user, password);
   }
 
-  public int deleteRow(int id, String database) {
+  public int deleteRow(int medarbejderID, String database) {
 
     String SQL = "DELETE FROM " + database + " WHERE MedarbejderID = ?";
 
@@ -28,7 +26,7 @@ public class Drop_Row
     try (Connection conn = connect();
         PreparedStatement pstmt = conn.prepareStatement(SQL)) {
 
-      pstmt.setInt(1, id);
+      pstmt.setInt(1, medarbejderID);
 
       affectedrows = pstmt.executeUpdate();
 
@@ -45,9 +43,7 @@ public class Drop_Row
     Drop_Row drop = new Drop_Row();
     drop.deleteRow(100002, "login");
     drop.deleteRow(100002, "medarbejdere");
-
     drop.deleteRow(100002, "tjekind");
-
     drop.deleteRow(100002, "vagter");
 
   }
