@@ -27,8 +27,8 @@ public class AddToTableImpr
 
     public int addEmp(String database, String fornavn, String efternavn,
                       String dob, String email, int tlf, String adresse, Boolean leder) {
-        String SQL = "insert into" +database+  " " +
-                "fornavn,efternavn,dob,email,tlf,adresse, leder "+ "(?,?,?,?,?,?,?,)";
+        String SQL = "insert into "+database+""  +
+                "(fornavn,efternavn, dob, email, tlf, adresse, leder) values  (?,?,?,?,?,?,?)";
         int affectedrows = 0;
 
         try (Connection conn = connect())

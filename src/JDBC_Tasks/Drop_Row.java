@@ -17,16 +17,16 @@ public class Drop_Row
     return DriverManager.getConnection(url, user, password);
   }
 
-  public int deleteRow(int medarbejderID, String database) {
+  public int deleteRow(int medarbejderid, String database) {
 
-    String SQL = "DELETE FROM " + database + " WHERE MedarbejderID = ?";
+    String SQL = "DELETE FROM " + database + " WHERE medarbejderid = ?";
 
     int affectedrows = 0;
 
     try (Connection conn = connect();
         PreparedStatement pstmt = conn.prepareStatement(SQL)) {
 
-      pstmt.setInt(1, medarbejderID);
+      pstmt.setInt(1, medarbejderid);
 
       affectedrows = pstmt.executeUpdate();
 
@@ -39,12 +39,15 @@ public class Drop_Row
   /*
    * @param args the command line arguments
    */
+
+  public int idToDelete = 100004;
   public static void main(String[] args) {
+
     Drop_Row drop = new Drop_Row();
-    drop.deleteRow(100002, "login");
-    drop.deleteRow(100002, "medarbejdere");
-    drop.deleteRow(100002, "tjekind");
-    drop.deleteRow(100002, "vagter");
+    drop.deleteRow(drop.idToDelete, "login");
+    drop.deleteRow(drop.idToDelete, "medarbejdere");
+    drop.deleteRow(drop.idToDelete, "tjekind");
+    drop.deleteRow(drop.idToDelete, "vagter");
 
   }
 }

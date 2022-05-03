@@ -23,7 +23,7 @@ public class TjekInd {
      * @return the number of affected rows
      */
     public int tjekind (String database, int medarbejderid) {
-        String SQL = "INSERT INTO "+ database + medarbejderid +"(dato, tjekud) VALUES  (?,?,?)";
+        String SQL = "INSERT INTO "+ database + medarbejderid +"(dato, tjekind ,tjekud) VALUES  (?,?,?)";
         int affectedrows = 0;
 
         try (Connection conn = connect()) {

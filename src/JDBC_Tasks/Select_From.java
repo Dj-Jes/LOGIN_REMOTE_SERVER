@@ -23,10 +23,9 @@ public class Select_From
   /*
    * Get all rows in table
    */
-  public void getEmp(String database, int medarbejderID, String fornavn, String efternavn,
-                     String dob, String email, int tlf, String adresse, Boolean leder) {
+  public void getEmp(String database) {
 
-    String SQL = "SELECT "+ medarbejderID + fornavn +efternavn + dob + email + tlf + adresse + leder +  " FROM "+database;
+    String SQL = "SELECT * FROM "+database;
 
     try (Connection conn = connect();
         Statement stmt = conn.createStatement();
@@ -71,7 +70,7 @@ public class Select_From
   private void displayEmp(ResultSet rs) throws SQLException {
     while (rs.next()) {
       System.out.println
-          (rs.getString("medarbejderID") + "\t"
+          (rs.getString("medarbejderid") + "\t"
           + rs.getString("fornavn")      + "\t"
           + rs.getString("efternavn")    + "\t"
           + rs.getString("dob")          + "\t"
@@ -88,13 +87,13 @@ public class Select_From
    *
    * @param EmpID
    */
-  public void findEmpByID(int medarbejderID, String database) {
-    String SQL = "select * from "+database+ "WHERE medarbejderID = ?;";
+  public void findEmpByID( String database, int medarbejderid) {
+    String SQL = "select * from "+database+ " WHERE medarbejderid = "+ medarbejderid ;
 
     try (Connection conn = connect();
         PreparedStatement pstmt = conn.prepareStatement(SQL)) {
 
-      pstmt.setInt(1, medarbejderID);
+
       ResultSet rs = pstmt.executeQuery();
       displayEmp(rs);
     } catch (SQLException ex) {
@@ -107,11 +106,14 @@ public class Select_From
    */
   public static void main(String[] args) {
     Select_From select = new Select_From();
-    select.getEmp("medarbejdere", 1235,"bob", "bobson", "12-12-1212", "@gmail.com", 1235, "8700", true);
+    select.getEmp("medarbejdere");
     System.out.println("getEMP don");
+
     select.getEmpCount("medarbejdere");
     System.out.println(select.getEmpCount("medarbejdere")+"  Count don");
-    select.findEmpByID(123456,"medarbejdere");
+
+
+    select.findEmpByID("medarbejdere", 100005 );
     System.out.println("Find by id");
 
   }

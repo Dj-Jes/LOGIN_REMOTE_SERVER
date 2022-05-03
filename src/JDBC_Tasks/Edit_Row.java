@@ -24,34 +24,34 @@ public class Edit_Row
      * @param lastName
      * @return the number of affected rows
      */
-    public int updateInfo( int medarbejderID,String database, String changeParameter, String changeTo ) {
-      String SQL = "UPDATE" +database+  "SET" +changeTo+ "= ? "
-          + "WHERE" +changeParameter+ "= ?";
+    public int updateInfo( String database, int id, String changeParameter, String changeTo) {
+      String SQL = "UPDATE " + database + " SET " +changeParameter+ " = " +changeTo+ " WHERE medarbejderid = "+ id;
+
+      System.out.println(""+SQL);
+
       int affectedrows = 0;
 
-      try (Connection conn = connect())
-      {
-        try (PreparedStatement pstmt = conn.prepareStatement(SQL))
-        {
-          pstmt.setString(1, changeTo);
-          pstmt.setInt(2, medarbejderID);
-          affectedrows = pstmt.executeUpdate();
+      try (Connection conn = connect();
+           PreparedStatement pstmt = conn.prepareStatement(SQL)) {
 
-        }
-      }
-      catch (SQLException ex)
-      {
+        pstmt.setString(1, changeParameter);
+        pstmt.setString(2, changeTo);
+        pstmt.setInt(3, id);
+
+        affectedrows = pstmt.executeUpdate();
+
+      } catch (SQLException ex) {
         System.out.println(ex.getMessage());
       }
       return affectedrows;
     }
 
-    /*
-     * @param args the command line arguments
-     */
-    public static void main(String[] args) {
-      Edit_Row editrow = new Edit_Row();
-      editrow.updateInfo(100045,"medarbejdere","efternavn","idk");
+  /**
+   * @param args the command line arguments
+   */
+  public static void main(String[] args) {
+    Edit_Row edit_row = new Edit_Row();
+    edit_row.updateInfo( "medarbejdere", 100005, "efternavn","idk");
 
-    }
+  }
 }

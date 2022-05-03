@@ -25,7 +25,7 @@ public class AddToLoginTableImpr {
      * @return the number of affected rows
      */
     public int addLogin(String database, String password) {
-        String SQL = "INSERT INTO "+ database + password +" VALUES  (?)";
+        String SQL = "INSERT INTO "+ database +"" +password +" VALUES  (?)";
         int affectedrows = 0;
 
         try (Connection conn = connect()) {
@@ -43,8 +43,7 @@ public class AddToLoginTableImpr {
     }
 
     public int updatePassword( int medarbejderID, String changeTo ) {
-        String SQL = "UPDATE login SET" +changeTo+ "= ? "
-                + "WHERE kodeord = ?";
+        String SQL = "UPDATE login SET kode = " +changeTo+ " WHERE medarbejderid = "+ medarbejderID;
         int affectedrows = 0;
 
         try (Connection conn = connect())
@@ -70,7 +69,7 @@ public class AddToLoginTableImpr {
     public static void main(String[] args) {
 
         AddToLoginTableImpr addToLoginImpr = new AddToLoginTableImpr();
-        addToLoginImpr.addLogin("medarbejdere", "1234");
+        addToLoginImpr.updatePassword(100005, "1234");
 
     }
 }
