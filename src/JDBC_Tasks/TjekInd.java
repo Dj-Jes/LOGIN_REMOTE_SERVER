@@ -10,7 +10,6 @@ public class TjekInd {
     private final String user = connInfo.getUser();
     private final String password = connInfo.getPassword();
 
-
     public Connection connect() throws SQLException {
         return DriverManager.getConnection(url, user, password);
     }
@@ -22,15 +21,34 @@ public class TjekInd {
      * @param lastName
      * @return the number of affected rows
      */
-    public int tjekind (String database, int medarbejderid) {
-        String SQL = "INSERT INTO "+ database + medarbejderid +"(dato, tjekind ,tjekud) VALUES  (?,?,?)";
+    public LocalDate date = LocalDate.now();
+    public Time time1 = new Time(12,52,15);
+    public Time time2 = new Time(15,52,15);
+
+    public Time getTime1() {
+        return time1;
+    }
+
+    public Time getTime2() {
+        return time2;
+    }
+
+    public LocalDate getDate() {
+
+        return date;
+    }
+
+    public int tjekind (int medarbejderid, LocalDate dato, Time tjekindtid, Time tjekudtid) {
+        String SQL = "INSERT INTO tjekind"+" (medarbejderid, dato, tjekindtid ,tjekudtid) VALUES  (?,?,?,?)";
         int affectedrows = 0;
+        System.out.println(""+ SQL);
 
         try (Connection conn = connect()) {
             try (PreparedStatement pstmt = conn.prepareStatement(SQL)) {
                 pstmt.setInt(1, medarbejderid);
-                pstmt.setObject(2, LocalDate.now());
-                pstmt.setObject(3, LocalTime.now());
+                pstmt.setObject(2, dato);
+                pstmt.setTime(3, tjekindtid);
+                pstmt.setTime(4, tjekudtid);
 
 
                 affectedrows = pstmt.executeUpdate();
@@ -49,6 +67,7 @@ public class TjekInd {
 
         TjekInd tjek = new TjekInd();
 
-        tjek.tjekind("tjekind", 1234);
+        tjek.tjekind( 123456, tjek.getDate(), tjek.getTime1(), tjek.getTime2());
     }
+
 }

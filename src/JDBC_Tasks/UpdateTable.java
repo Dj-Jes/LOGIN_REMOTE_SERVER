@@ -17,9 +17,10 @@ public class UpdateTable
     return DriverManager.getConnection(url, user, password);
        }
 
-    public int updateAll(String database) {
 
-    String SQL = "select * from" + database+ "order by medarbejderID";
+    public int updateAll(String database, String searchCriteria) {
+
+    String SQL = "select * from " + database+ " order by " +searchCriteria;
 
     int affectedrows = 0;
 
@@ -36,11 +37,12 @@ public class UpdateTable
         /*
          * @param args the command line arguments
          */
-    public void main(String[] args) {
+        public static void main(String[] args) {
         UpdateTable updateTable = new UpdateTable();
-        updateTable.updateAll("medarbejdere");
-        updateTable.updateAll("vagter");
-        updateTable.updateAll("tjekind");
-        updateTable.updateAll("login");
+        updateTable.updateAll("medarbejdere","medarbejderid");
+            System.out.println("Medarbejdere sorteret");
+        updateTable.updateAll("vagter","dato");
+        updateTable.updateAll("tjekind","dato");
+        updateTable.updateAll("login","medarbejderid");
     }
 }
