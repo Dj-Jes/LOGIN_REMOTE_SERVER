@@ -87,11 +87,26 @@ public class Select_From
    *
    * @param EmpID
    */
+  public void findEmp( String database, String changeParameter, String contains) {
+    String SQL = "select * from "+database+ " WHERE " +changeParameter+ " LIKE  '%"+contains+"%'";
+
+
+    try (Connection conn = connect();
+        PreparedStatement pstmt = conn.prepareStatement(SQL)) {
+
+
+      ResultSet rs = pstmt.executeQuery();
+      displayEmp(rs);
+    } catch (SQLException ex) {
+      System.out.println(ex.getMessage());
+    }
+  }
+
   public void findEmpByID( String database, int medarbejderid) {
     String SQL = "select * from "+database+ " WHERE medarbejderid = "+ medarbejderid ;
 
     try (Connection conn = connect();
-        PreparedStatement pstmt = conn.prepareStatement(SQL)) {
+         PreparedStatement pstmt = conn.prepareStatement(SQL)) {
 
 
       ResultSet rs = pstmt.executeQuery();
@@ -114,6 +129,7 @@ public class Select_From
 
 
     select.findEmpByID("medarbejdere", 100005 );
+    select.findEmp("medarbejdere", "medarbejderid","100005");
     System.out.println("Find by id");
 
   }
