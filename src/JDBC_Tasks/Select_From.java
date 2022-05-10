@@ -87,8 +87,8 @@ public class Select_From
    *
    * @param EmpID
    */
-  public void findEmp( String database, String changeParameter, String contains) {
-    String SQL = "select * from "+database+ " WHERE " +changeParameter+ " LIKE  '%"+contains+"%'";
+  public void findEmp( String database, String searchParameter, String contains) {
+    String SQL = "select * from "+database+ " WHERE " +searchParameter+ " LIKE  '%"+contains+"%'";
 
 
     try (Connection conn = connect();
@@ -129,7 +129,7 @@ public class Select_From
 
 
     select.findEmpByID("medarbejdere", 100005 );
-    select.findEmp("medarbejdere", "medarbejderid","100005");
+    select.findEmp("medarbejdere", "efternavn","Idk");
     System.out.println("Find by id");
 
   }

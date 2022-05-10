@@ -18,15 +18,16 @@ public class UpdateTable
        }
 
 
-    public int updateAll(String database, String searchCriteria) {
+    public int updateAll (String database, String searchCriteria) {
 
     String SQL = "select * from " + database+ " order by " +searchCriteria;
 
     int affectedrows = 0;
+        System.out.println(""+SQL);
 
     try (Connection conn = connect();
          PreparedStatement pstmt = conn.prepareStatement(SQL)) {
-         affectedrows = pstmt.executeUpdate();
+         pstmt.executeUpdate();
 
          } catch (SQLException ex) {
            System.out.println(ex.getMessage());
@@ -40,9 +41,11 @@ public class UpdateTable
         public static void main(String[] args) {
         UpdateTable updateTable = new UpdateTable();
         updateTable.updateAll("medarbejdere","medarbejderid");
-            System.out.println("Medarbejdere sorteret");
+       /*     System.out.println("Medarbejdere sorteret");
         updateTable.updateAll("vagter","dato");
         updateTable.updateAll("tjekind","dato");
         updateTable.updateAll("login","medarbejderid");
+
+        */
     }
 }

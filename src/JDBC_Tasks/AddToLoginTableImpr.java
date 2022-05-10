@@ -24,6 +24,8 @@ public class AddToLoginTableImpr {
      * @param lastName
      * @return the number of affected rows
      */
+
+    // TODO: 10-05-2022  
     public int addLogin(String database, String password) {
         String SQL = "INSERT INTO "+ database +"" +password +" VALUES  (?)";
         int affectedrows = 0;
@@ -70,6 +72,7 @@ public class AddToLoginTableImpr {
 
         AddToLoginTableImpr addToLoginImpr = new AddToLoginTableImpr();
         addToLoginImpr.updatePassword(100005, "1234");
+        addToLoginImpr.addLogin("login", "5555");
 
     }
 }
