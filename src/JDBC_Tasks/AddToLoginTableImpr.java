@@ -25,14 +25,17 @@ public class AddToLoginTableImpr {
      * @return the number of affected rows
      */
 
-    // TODO: 10-05-2022  
-    public int addLogin(String database, String password) {
-        String SQL = "INSERT INTO "+ database +"" +password +" VALUES  (?)";
+
+    public int addLogin(String database, int medarbejderid, String password) {
+        String SQL = "INSERT INTO login "+password +" where medarbejderid = " +medarbejderid;
         int affectedrows = 0;
+
+        System.out.println(""+ SQL);
 
         try (Connection conn = connect()) {
             try (PreparedStatement pstmt = conn.prepareStatement(SQL)) {
-                pstmt.setString(1, password);
+                pstmt.setString(2, password);
+                pstmt.setInt(1,medarbejderid);
 
 
                 affectedrows = pstmt.executeUpdate();
@@ -72,7 +75,7 @@ public class AddToLoginTableImpr {
 
         AddToLoginTableImpr addToLoginImpr = new AddToLoginTableImpr();
         addToLoginImpr.updatePassword(100005, "1234");
-        addToLoginImpr.addLogin("login", "5555");
+        addToLoginImpr.addLogin("login", 5555, "1234" );
 
     }
 }

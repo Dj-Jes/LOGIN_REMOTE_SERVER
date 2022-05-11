@@ -1,8 +1,10 @@
 package JDBC_Tasks;
 
 import java.sql.*;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.Calendar;
 
 public class TjekInd {
     ConnInfo connInfo = new ConnInfo();
@@ -22,23 +24,18 @@ public class TjekInd {
      * @return the number of affected rows
      */
     public LocalDate date = LocalDate.now();
-    public Time time1 = new Time(12,52,15);
-    public Time time2 = new Time(15,52,15);
 
-    public Time getTime1() {
-        return time1;
+    public LocalTime tjekind = LocalTime.now();
+
+    public LocalTime getTjekind() {
+        return tjekind;
     }
-
-    public Time getTime2() {
-        return time2;
-    }
-
     public LocalDate getDate() {
 
         return date;
     }
 
-    public int tjekind (int medarbejderid, LocalDate dato, Time tjekindtid, Time tjekudtid) {
+    public int tjekind (int medarbejderid, LocalDate dato, LocalTime tjekindtid, Time tjekudtid) {
         String SQL = "INSERT INTO tjekind"+" (medarbejderid, dato, tjekindtid ,tjekudtid) VALUES  (?,?,?,?)";
         int affectedrows = 0;
         System.out.println(""+ SQL);
@@ -47,9 +44,8 @@ public class TjekInd {
             try (PreparedStatement pstmt = conn.prepareStatement(SQL)) {
                 pstmt.setInt(1, medarbejderid);
                 pstmt.setObject(2, dato);
-                pstmt.setTime(3, tjekindtid);
+                pstmt.setObject(3, tjekindtid);
                 pstmt.setTime(4, tjekudtid);
-
 
                 affectedrows = pstmt.executeUpdate();
 
@@ -67,7 +63,7 @@ public class TjekInd {
 
         TjekInd tjek = new TjekInd();
 
-        tjek.tjekind( 123456, tjek.getDate(), tjek.getTime1(), tjek.getTime2());
+        tjek.tjekind( 3, tjek.getDate(),tjek.tjekind, null);
     }
 
 }
