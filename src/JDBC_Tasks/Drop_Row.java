@@ -40,14 +40,14 @@ public class Drop_Row
    * @param args the command line arguments
    */
 
-  public int idToDelete = 100004;
+  public int idToDelete = 100003;
   public static void main(String[] args) {
 
     Drop_Row drop = new Drop_Row();
     drop.deleteRow(drop.idToDelete, "login");
-    drop.deleteRow(drop.idToDelete, "medarbejdere");
-    drop.deleteRow(drop.idToDelete, "tjekind");
-    drop.deleteRow(drop.idToDelete, "vagter");
+    drop.deleteRow(drop.idToDelete, "medarbejder");
+    drop.deleteRow(drop.idToDelete, "tidsregistrering");
+    drop.deleteRow(drop.idToDelete, "vagt");
 
   }
 }

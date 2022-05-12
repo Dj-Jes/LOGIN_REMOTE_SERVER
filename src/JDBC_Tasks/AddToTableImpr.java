@@ -61,8 +61,8 @@ public class AddToTableImpr
     public static void main(String[] args) {
 
         AddToTableImpr addToTableImpr =new AddToTableImpr();
-        addToTableImpr.addEmp("medarbejder","Jon","Jonson","1999-12-20","jon@gmail.com",
-                12345678,"Sted, Postnr,By",true);
+        addToTableImpr.addEmp("medarbejder","Bo","Bosen","1999-12-25","bosen@gmail.com",
+                45678901,"Sted, Postnr,By",false);
 
     }
 }

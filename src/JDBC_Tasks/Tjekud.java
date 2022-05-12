@@ -26,7 +26,7 @@ public class Tjekud {
 
     public int tjekud( int id,String database, LocalTime changeTo ) {
         String SQL = "UPDATE " +database+  " SET tjekudtid = ? "
-                + "WHERE medarbejderid = ?";
+                + "WHERE medarbejderid_fk = ?";
         System.out.println(""+SQL);
 
         int affectedrows = 0;
@@ -50,7 +50,7 @@ public class Tjekud {
      */
     public static void main(String[] args) {
         Tjekud tjekud = new Tjekud();
-        tjekud.tjekud( 3,"tjekind",tjekud.tjekud);
+        tjekud.tjekud( 100000,"tidsregistrering",tjekud.tjekud);
 
     }
 }

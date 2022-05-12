@@ -36,7 +36,7 @@ public class TjekInd {
     }
 
     public int tjekind (int medarbejderid, LocalDate dato, LocalTime tjekindtid, Time tjekudtid) {
-        String SQL = "INSERT INTO tjekind"+" (medarbejderid, dato, tjekindtid ,tjekudtid) VALUES  (?,?,?,?)";
+        String SQL = "INSERT INTO tidsregistrering"+" (medarbejderid_fk, dato, tjekindtid ,tjekudtid) VALUES  (?,?,?,?)";
         int affectedrows = 0;
         System.out.println(""+ SQL);
 
@@ -63,7 +63,7 @@ public class TjekInd {
 
         TjekInd tjek = new TjekInd();
 
-        tjek.tjekind( 3, tjek.getDate(),tjek.tjekind, null);
+        tjek.tjekind( 100000, tjek.getDate(),tjek.tjekind, null);
     }
 
 }

@@ -24,18 +24,17 @@ public class AddToLoginTableImpr {
      * @param lastName
      * @return the number of affected rows
      */
-
-
-    public int addLogin(String database, int medarbejderid, String password) {
-        String SQL = "INSERT INTO login "+password +" where medarbejderid = " +medarbejderid;
+    public int addLogintest( String kodeord, int medarbejderid) {
+        String SQL = "INSERT INTO login (kodeord, medarbejderid_fk) values (?,?)";
         int affectedrows = 0;
 
         System.out.println(""+ SQL);
 
         try (Connection conn = connect()) {
             try (PreparedStatement pstmt = conn.prepareStatement(SQL)) {
-                pstmt.setString(2, password);
-                pstmt.setInt(1,medarbejderid);
+                pstmt.setString(1, kodeord);
+                pstmt.setInt(2,medarbejderid);
+
 
 
                 affectedrows = pstmt.executeUpdate();
@@ -48,7 +47,7 @@ public class AddToLoginTableImpr {
     }
 
     public int updatePassword( int medarbejderID, String changeTo ) {
-        String SQL = "UPDATE login SET kode = " +changeTo+ " WHERE medarbejderid = "+ medarbejderID;
+        String SQL = "UPDATE login SET kodeord = " +changeTo+ " WHERE medarbejderid_fk = "+ medarbejderID;
         int affectedrows = 0;
 
         try (Connection conn = connect())
@@ -68,14 +67,37 @@ public class AddToLoginTableImpr {
         return affectedrows;
     }
 
+    public int updatetest( int id, String changeTo ) {
+        String SQL = "UPDATE login SET kodeord = ?"
+                + "WHERE medarbejderid_fk = ?";
+        System.out.println(""+SQL);
+
+        int affectedrows = 0;
+
+        try (Connection conn = connect();
+             PreparedStatement pstmt = conn.prepareStatement(SQL)) {
+
+            pstmt.setString(1, changeTo);
+            pstmt.setInt(2, id);
+
+            affectedrows = pstmt.executeUpdate();
+
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+        return affectedrows;
+    }
+
     /*
      * @param args the command line arguments
      */
     public static void main(String[] args) {
 
         AddToLoginTableImpr addToLoginImpr = new AddToLoginTableImpr();
-        addToLoginImpr.updatePassword(100005, "1234");
-        addToLoginImpr.addLogin("login", 5555, "1234" );
+        //addToLoginImpr.updatePassword(100006, "4321");
+        //addToLoginImpr.addLogin("login", 100000, "1234" );
+        //addToLoginImpr.addLogintest("1234",100006);
+        addToLoginImpr.updatetest(100006, "4321");
 
     }
 }

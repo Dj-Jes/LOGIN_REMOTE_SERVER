@@ -22,9 +22,9 @@ public class Vagt {
      * @return the number of affected rows
      */
 
-    public Date date = Date.valueOf("1999-12-26");
-    public Time startTime = new Time(12,52,15);
-    public Time slutTime = new Time(15,52,15);
+    public Date date = Date.valueOf("2022-5-13");
+    public Time startTime = new Time(12,00,00);
+    public Time slutTime = new Time(16,00,00);
 
     public Time getStartTime() {
         return startTime;
@@ -41,7 +41,7 @@ public class Vagt {
     public int opretvagt(String database, int medarbejderid, Date dato,
                          Time startTime, Time slutTime) {
         String SQL = "insert into "+database+""  +
-                "(dato, starttid, sluttid, medarbejderid) values  (?,?,?,?)";
+                "(dato, starttid, sluttid, medarbejderid_fk) values  (?,?,?,?)";
         int affectedrows = 0;
 
         try (Connection conn = connect())
@@ -72,7 +72,7 @@ public class Vagt {
 
         Vagt vagt = new Vagt();
 
-        vagt.opretvagt("vagt",100005,  vagt.getDate() ,vagt.startTime, vagt.getSlutTime() );
+        vagt.opretvagt("vagt",100000,  vagt.getDate() ,vagt.startTime, vagt.getSlutTime() );
 
     }
 }
